@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://xn--g7q0iw0x3volkt.cn/sitemap.xml
