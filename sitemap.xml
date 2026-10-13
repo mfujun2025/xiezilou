@@ -702,4 +702,28 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-</urlset>
+    <url>
+      <loc>https://xn--g7q0iw0x3volkt.cn/articles/xiezilou-bangongshi-qubie.html</loc>
+      <lastmod>2026-10-13</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+    <url>
+      <loc>https://xn--g7q0iw0x3volkt.cn/articles/jiaji-xiezilou.html</loc>
+      <lastmod>2026-10-13</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+    <url>
+      <loc>https://xn--g7q0iw0x3volkt.cn/articles/xiezilou-zhongjie-zhijie.html</loc>
+      <lastmod>2026-10-13</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+    <url>
+      <loc>https://xn--g7q0iw0x3volkt.cn/articles/lianhe-gongzuoshi.html</loc>
+      <lastmod>2026-10-13</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+    </url>
+  </urlset>
