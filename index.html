@@ -87,7 +87,7 @@
   <section class="py-12">
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-2xl font-bold mb-6">最新资讯</h2>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div id="news-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         <a href="/articles/shanghai-office-rent-guide.html" class="card bg-white rounded-lg overflow-hidden shadow-sm">
           <div class="p-6">
             <span class="text-xs text-blue-600 font-medium">选址攻略</span>
@@ -377,6 +377,7 @@
           </div>
         </a>
       </div>
+      <nav id="news-pager" class="hidden mt-8 flex flex-wrap justify-center items-center gap-2" aria-label="资讯分页"></nav>
       <div class="text-center mt-8">
         <a href="/articles/" class="inline-block border-2 border-blue-900 text-blue-900 px-8 py-3 rounded-lg font-medium hover:bg-blue-900 hover:text-white transition">查看全部文章 →</a>
       </div>
@@ -470,6 +471,50 @@
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
     </svg>
   </a>
+
+  <!-- 最新资讯客户端分页 -->
+  <script>
+  (function () {
+    var grid = document.getElementById('news-grid');
+    var pager = document.getElementById('news-pager');
+    if (!grid || !pager) return;
+    var cards = Array.prototype.slice.call(grid.querySelectorAll('a.card'));
+    var PER = 9;
+    var total = Math.ceil(cards.length / PER);
+    if (total <= 1) return;
+    var cur = 1;
+    var m = location.hash.match(/^#news-(\d+)$/);
+    if (m) cur = Math.min(Math.max(1, parseInt(m[1], 10)), total);
+    var btnOff = 'px-4 py-2 rounded-lg text-sm border border-gray-200 bg-white text-gray-600 hover:bg-gray-100 transition';
+    var btnOn = 'px-4 py-2 rounded-lg text-sm border border-blue-900 bg-blue-900 text-white transition';
+    function render() {
+      cards.forEach(function (c, i) {
+        c.style.display = (Math.floor(i / PER) + 1 === cur) ? '' : 'none';
+      });
+      var html = '';
+      if (cur > 1) {
+        html += '<button data-p="' + (cur - 1) + '" class="' + btnOff + '" aria-label="上一页">← 上一页</button>';
+      }
+      for (var i = 1; i <= total; i++) {
+        html += '<button data-p="' + i + '" class="' + (i === cur ? btnOn : btnOff) + '" aria-label="第' + i + '页">' + i + '</button>';
+      }
+      if (cur < total) {
+        html += '<button data-p="' + (cur + 1) + '" class="' + btnOff + '" aria-label="下一页">下一页 →</button>';
+      }
+      pager.innerHTML = html;
+      pager.classList.remove('hidden');
+    }
+    pager.addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('button[data-p]') : null;
+      if (!b) return;
+      cur = parseInt(b.getAttribute('data-p'), 10);
+      history.replaceState(null, '', '#news-' + cur);
+      render();
+      grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    render();
+  })();
+  </script>
 
 </body>
 </html>
